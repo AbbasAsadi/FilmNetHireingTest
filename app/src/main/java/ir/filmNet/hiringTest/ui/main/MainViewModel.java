@@ -1,18 +1,15 @@
 package ir.filmNet.hiringTest.ui.main;
 
-import android.arch.lifecycle.LifecycleObserver;
-
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import javax.inject.Inject;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import ir.filmNet.hiringTest.data.DataWrapper;
 import ir.filmNet.hiringTest.data.remote.model.SearchResponse;
 import ir.filmNet.hiringTest.data.repository.SearchRepository;
+import ir.filmNet.hiringTest.ui.ParentViewModel;
 
-public class MainViewModel extends ViewModel implements LifecycleObserver {
+public class MainViewModel extends ParentViewModel {
     private final SearchRepository repository;
     public MutableLiveData<DataWrapper<SearchResponse>> searchResponse = new MutableLiveData<>();
 
@@ -22,9 +19,13 @@ public class MainViewModel extends ViewModel implements LifecycleObserver {
     }
 
     public void search(String query) {
-        searchResponse.setValue(DataWrapper.loading());
-        new CompositeDisposable().add(repository.search(query)
-                .subscribe(searchResponseDataWrapper -> searchResponse.postValue(searchResponseDataWrapper)
+        loading.set(true);
+        searchResponse.postValue(DataWrapper.loading());
+        addToUnsubscribed(repository.search(query)
+                .subscribe(searchResponseDataWrapper -> {
+                            loading.set(false);
+                            searchResponse.postValue(searchResponseDataWrapper);
+                        }
                 )
         );
     }

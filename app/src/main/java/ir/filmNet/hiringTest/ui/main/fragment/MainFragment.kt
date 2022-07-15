@@ -38,7 +38,6 @@ class MainFragment : BaseFragment() {
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.length > 2) {
-                        viewModel.searchResponse.removeObservers(viewLifecycleOwner)
                         viewModel.search(s.toString())
                     }
                 }
@@ -52,7 +51,6 @@ class MainFragment : BaseFragment() {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    binding.isLoading = s!!.length > 2
                 }
             }
         )
@@ -60,18 +58,17 @@ class MainFragment : BaseFragment() {
 
     private fun subscribeResponse() {
         viewModel.searchResponse.observe(viewLifecycleOwner) {
+            binding.isLoading = viewModel.loading.get()
             when (it.status) {
                 SUCCESS -> {
-                    binding.isLoading = false
                     Toast.makeText(requireContext(), "SUCCESS", Toast.LENGTH_LONG).show()
                 }
                 SERVER_ERROR -> {
-                    binding.isLoading = false
-                    Toast.makeText(requireContext(), "SERVER_ERROR", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "SERVER_ERROR" + it.message, Toast.LENGTH_LONG)
+                        .show()
                 }
                 LOADING -> {
-                    binding.isLoading = true
-                    Toast.makeText(requireContext(), "LOADING", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(requireContext(), "LOADING", Toast.LENGTH_LONG).show()
 
                 }
             }
