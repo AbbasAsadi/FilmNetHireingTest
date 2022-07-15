@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ir.filmNet.hiringTest.data.Status.*
+import ir.filmNet.hiringTest.data.remote.model.Data
 import ir.filmNet.hiringTest.databinding.FragmentMainBinding
 import ir.filmNet.hiringTest.ui.BaseFragment
 import ir.filmNet.hiringTest.ui.main.MainViewModel
+import ir.filmNet.hiringTest.ui.main.fragment.adapter.VideoListAdapter
 
 class MainFragment : BaseFragment() {
     private lateinit var binding: FragmentMainBinding
@@ -61,18 +65,42 @@ class MainFragment : BaseFragment() {
             binding.isLoading = viewModel.loading.get()
             when (it.status) {
                 SUCCESS -> {
-                    Toast.makeText(requireContext(), "SUCCESS", Toast.LENGTH_LONG).show()
+                    if (it.data?.data != null) {
+                        if (!it.data.data.videos.isNullOrEmpty()) {
+                            binding.isEmptyList = false
+                            setupRecyclerView(it.data.data)
+                        } else {
+                            binding.isEmptyList = true
+                        }
+                    } else
+                        Toast.makeText(
+                            requireContext(),
+                            "داده ای یافت نشد",
+                            Toast.LENGTH_LONG
+                        ).show()
                 }
                 SERVER_ERROR -> {
-                    Toast.makeText(requireContext(), "SERVER_ERROR" + it.message, Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        requireContext(),
+                        "SERVER_ERROR\n" + it.message,
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
                 LOADING -> {
-//                    Toast.makeText(requireContext(), "LOADING", Toast.LENGTH_LONG).show()
-
                 }
             }
         }
+    }
+
+    private fun setupRecyclerView(data: Data) {
+        binding.videoRecyclerView.layoutManager = GridLayoutManager(
+            requireContext(),
+            2,
+            RecyclerView.VERTICAL,
+            false
+        )
+        binding.videoRecyclerView.adapter = VideoListAdapter(requireContext(), data.videos)
     }
 }
 

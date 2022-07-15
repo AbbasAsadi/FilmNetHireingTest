@@ -18,6 +18,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#E5E5E5"
         tools:context=".ui.main.fragment.MainFragment">
 
         <TextView
@@ -48,6 +49,7 @@
             android:paddingBottom="8dp"
             android:textColor="@color/item_list_gray"
             android:textColorHint="@color/light_gray"
+            android:textDirection="rtl"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -61,28 +63,28 @@
             android:layout_margin="16dp"
             android:contentDescription="@android:string/untitled"
             android:src="@drawable/empty_list_icon"
-            tools:visibleInvisible="@{isEmptyList}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_edit_text" />
+            app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+            tools:visible_gone="@{isEmptyList}"
+            tools:visible_invisible="@{!isLoading}" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_result_recycler_view"
-            android:layout_width="0dp"
+            android:id="@+id/video_recycler_view"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layoutDirection="rtl"
-            android:orientation="vertical"
-            android:textDirection="rtl"
-            tools:visibleInvisible="@{!isEmptyList}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_edit_text" />
+            app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+            tools:visible_gone="@{!isEmptyList}"
+            tools:visible_invisible="@{!isLoading}" />
 
         <LinearLayout
             android:id="@+id/loading_layout"
@@ -91,11 +93,11 @@
             android:layout_marginTop="16dp"
             android:background="#5fff"
             android:orientation="horizontal"
-            tools:visibleInvisible="@{isLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_edit_text">
+            app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+            tools:visible_invisible="@{isLoading}">
 
             <ProgressBar
                 style="?android:attr/progressBarStyle"

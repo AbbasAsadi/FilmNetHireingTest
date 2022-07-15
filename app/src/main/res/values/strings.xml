@@ -6,5 +6,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="searchEditTextHint">جستجو کنید مثلا میم مثل مادر</string>
+    <string name="videos">فیلم ها</string>
+    <string name="artists">هنرمندان</string>
+    <string name="promoted_video">فیلم های پیشنهادی</string>
+    <string name="duration">مدت زمان:</string>
+    <string name="year">سال ساخت:</string>
+    <string name="summery">خلاصه داستان:</string>
 
 </resources>

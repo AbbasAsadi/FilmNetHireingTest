@@ -14,5 +14,5 @@ data class Data(
 
     @Expose
     @SerializedName("promoted_videos")
-    val promotedVideos: List<PromotedVideosItem?>? = null
+    val promotedVideos: List<VideosItem?>? = null
 )

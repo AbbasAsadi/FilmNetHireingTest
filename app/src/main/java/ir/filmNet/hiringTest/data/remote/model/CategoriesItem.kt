@@ -11,5 +11,5 @@ data class CategoriesItem(
 
     @Expose
     @SerializedName("items")
-    val items: List<ItemsItem?>? = null
+    val items: List<PersonItem?>? = null
 )
