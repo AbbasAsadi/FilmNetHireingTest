@@ -1,5 +1,6 @@
 package ir.filmNet.hiringTest;
 
+import android.app.Application;
 import android.content.Context;
 
 import javax.inject.Inject;
@@ -7,15 +8,16 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasAndroidInjector;
-import dagger.android.support.DaggerApplication;
+import ir.filmNet.hiringTest.di.component.DaggerAppComponent;
 
-public class BaseApplication extends DaggerApplication implements HasAndroidInjector {
+public class BaseApplication extends Application implements HasAndroidInjector {
     @Inject
     DispatchingAndroidInjector<Object> dispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        DaggerAppComponent.builder().application(this).build().inject(this);
     }
 
     @Override
@@ -26,11 +28,5 @@ public class BaseApplication extends DaggerApplication implements HasAndroidInje
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-    }
-
-    @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().application(this).build();
-
     }
 }

@@ -2,8 +2,6 @@ package ir.filmNet.hiringTest.di.module;
 
 import static ir.filmNet.hiringTest.data.remote.api.ServerAddresses.BASE_URL;
 
-import android.app.Application;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ihsanbal.logging.Level;
@@ -23,7 +21,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.internal.platform.Platform;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -31,14 +29,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class ApiModule {
-
-
-    private static final String TAG = "ApiModule";
-
     /**
      * The method returns the Gson object
      */
-
     @Provides
     @Singleton
     Gson provideGson() {
@@ -46,9 +39,6 @@ public class ApiModule {
                 .setLenient()
                 .disableHtmlEscaping()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                //.registerTypeAdapter(UtcISODate.class , new GsonUTCDateAdapter())
-                //.registerTypeAdapter(Date.class, new GsonUTCDateAdapter())
-//                .registerTypeAdapter(Widget.class , new WidgetDeserializer())
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
@@ -56,7 +46,6 @@ public class ApiModule {
     /**
      * The method returns the HttpLoggingInterceptor object
      */
-
     @Provides
     @Singleton
     LoggingInterceptor provideHttpLoggingInterceptor() {
@@ -67,20 +56,15 @@ public class ApiModule {
                 .response("Response")
                 .addHeader("version", BuildConfig.VERSION_NAME)
                 .build();
-     /*   HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message -> Log.i(TAG, "provideHttpLoggingInterceptor: " + message));
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        return interceptor;*/
     }
 
     /**
      * The method returns the Okhttp object
      */
-
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(LoggingInterceptor loggingInterceptor, /*Cache cache,*/ Application application) {
+    OkHttpClient provideOkHttpClient(LoggingInterceptor loggingInterceptor) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-//        httpClient.cache(cache);
         httpClient.addInterceptor(loggingInterceptor);
         httpClient.addInterceptor(new RequestInterceptor());
         httpClient.connectTimeout(30, TimeUnit.SECONDS);
@@ -95,13 +79,12 @@ public class ApiModule {
     /**
      * The method returns the Retrofit object
      */
-
     @Provides
     @Singleton
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .build();
@@ -110,7 +93,6 @@ public class ApiModule {
     /**
      * The method provide api service
      */
-
     @Provides
     @Singleton
     ApiService provideApiService(Retrofit retrofit) {

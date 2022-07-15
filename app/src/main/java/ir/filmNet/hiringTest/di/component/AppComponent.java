@@ -30,7 +30,6 @@ import ir.filmNet.hiringTest.di.module.ViewModelModule;
         ViewModelModule.class,
         ActivityModule.class,
         PicassoModule.class,
-        ServiceModule.class,
         AndroidSupportInjectionModule.class,
         FragmentModule.class
 })

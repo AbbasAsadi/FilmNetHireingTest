@@ -16,7 +16,6 @@ import okhttp3.Response;
 public class RequestInterceptor implements Interceptor {
 
     /**
-     * @param chain
      * @return Response
      * @throws IOException add request headers to all request
      */
@@ -26,7 +25,6 @@ public class RequestInterceptor implements Interceptor {
 
         Request.Builder builder = chain.request().newBuilder();
         builder.addHeader("X-Platform", "Android");
-        builder.addHeader("Accept-Encoding", "identity");
 
         return chain.proceed(builder.build());
     }

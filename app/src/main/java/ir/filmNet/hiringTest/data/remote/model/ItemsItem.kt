@@ -1,18 +1,23 @@
 package ir.filmNet.hiringTest.data.remote.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class ItemsItem(
 
-    @field:SerializedName("title")
+    @Expose
+    @SerializedName("title")
     val title: String? = null,
 
-    @field:SerializedName("person")
+    @Expose
+    @SerializedName("person")
     val person: Person? = null,
 
-    @field:SerializedName("person_id")
+    @Expose
+    @SerializedName("person_id")
     val personId: String? = null,
 
-    @field:SerializedName("order")
+    @Expose
+    @SerializedName("order")
     val order: Int? = null
 )

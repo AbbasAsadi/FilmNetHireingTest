@@ -9,13 +9,11 @@ import dagger.multibindings.IntoMap;
 import ir.filmNet.hiringTest.di.ViewModelKey;
 import ir.filmNet.hiringTest.factory.ViewModelFactory;
 import ir.filmNet.hiringTest.ui.main.MainViewModel;
-/**
- * @author Abbas Asadi
- */
 
 /**
  * @author Abbas Asadi
  */
+
 @Module
 public abstract class ViewModelModule {
 
@@ -29,7 +27,6 @@ public abstract class ViewModelModule {
      * and a Provider that will build a MainActivityViewModel
      * object.
      */
-
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel.class)

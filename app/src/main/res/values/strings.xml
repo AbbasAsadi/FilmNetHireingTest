@@ -5,5 +5,6 @@
     <string name="error">خطا</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="searchEditTextHint">جستجو کنید مثلا میم مثل مادر</string>
 
 </resources>

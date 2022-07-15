@@ -24,9 +24,6 @@ public class PicassoModule {
     public Picasso providePicasso(Application context, OkHttp3Downloader downloader) {
         Picasso picasso = new Picasso.Builder(context)
                 .downloader(downloader)
-                /*.indicatorsEnabled(true)
-                .loggingEnabled(true)*/
-
                 .build();
         Picasso.setSingletonInstance(picasso);
 

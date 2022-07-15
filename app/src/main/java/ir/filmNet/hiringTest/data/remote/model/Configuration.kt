@@ -1,15 +1,19 @@
 package ir.filmNet.hiringTest.data.remote.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class Configuration(
 
-    @field:SerializedName("navigation_button")
+    @Expose
+    @SerializedName("navigation_button")
     val navigationButton: NavigationButton? = null,
 
-    @field:SerializedName("navigation_configuration")
+    @Expose
+    @SerializedName("navigation_configuration")
     val navigationConfiguration: NavigationConfiguration? = null,
 
-    @field:SerializedName("items")
+    @Expose
+    @SerializedName("items")
     val items: List<ItemsItem?>? = null
 )
