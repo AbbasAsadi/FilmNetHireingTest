@@ -41,7 +41,7 @@ class MainFragment : BaseFragment() {
         binding.searchEditText.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    if (s!!.length > 2) {
+                    if (s!!.length > 1) {
                         viewModel.search(s.toString())
                     }
                 }

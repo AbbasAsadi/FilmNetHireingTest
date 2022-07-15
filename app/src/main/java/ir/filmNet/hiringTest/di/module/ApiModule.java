@@ -35,10 +35,12 @@ public class ApiModule {
     @Provides
     @Singleton
     Gson provideGson() {
+        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss";
+
         return new GsonBuilder()
                 .setLenient()
                 .disableHtmlEscaping()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .setDateFormat(dateFormat)
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }

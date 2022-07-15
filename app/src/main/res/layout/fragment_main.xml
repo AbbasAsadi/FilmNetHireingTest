@@ -67,8 +67,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_edit_text"
-            tools:visible_gone="@{isEmptyList}"
-            tools:visible_invisible="@{!isLoading}" />
+            tools:visible_invisible="@{!isLoading}"
+            tools:visible_gone="@{isEmptyList}" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -83,8 +83,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_edit_text"
-            tools:visible_gone="@{!isEmptyList}"
-            tools:visible_invisible="@{!isLoading}" />
+            tools:visible_invisible="@{!isLoading}"
+            tools:visible_gone="@{!isEmptyList}" />
 
         <LinearLayout
             android:id="@+id/loading_layout"

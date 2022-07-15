@@ -11,7 +11,6 @@ import ir.filmNet.hiringTest.BaseApplication;
 import ir.filmNet.hiringTest.di.module.ActivityModule;
 import ir.filmNet.hiringTest.di.module.ApiModule;
 import ir.filmNet.hiringTest.di.module.FragmentModule;
-import ir.filmNet.hiringTest.di.module.PicassoModule;
 import ir.filmNet.hiringTest.di.module.ViewModelModule;
 
 /**
@@ -29,7 +28,6 @@ import ir.filmNet.hiringTest.di.module.ViewModelModule;
         ApiModule.class,
         ViewModelModule.class,
         ActivityModule.class,
-        PicassoModule.class,
         AndroidSupportInjectionModule.class,
         FragmentModule.class
 })
